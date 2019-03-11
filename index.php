@@ -129,17 +129,37 @@ require_once __DIR__ . '/index.ctrl.php';
 <br/>
 
 
-<?php
-$torrents = $transmission->get('all');
-$torrents = $torrents['torrents'];
-// var_dump($torrents);
-?>
-	<h2>Torrents</h2>
+	<h2>Torrents object</h2>
+	<table class="table table-dark">
+		<thead class="thead-light ">
+			<tr>
+				<th scope="col">name</th>
+				<th scope="col">status</th>
+				<th scope="col">actions</th>
+	    	</tr>
+		</thead>
+		<tbody>
+		<?php
+		foreach ($torrentsObject as $torrent) {
+			?>
+			<tr>
+				<td><?= $torrent->getName() ?></td>
+				<td><?= $torrent->getStatus() ?></td>
+				<td><button class="btn btn-primary">xxx</button></td>
+			</tr>
+			<?php
+		}
+		?>
+		</tbody>
+	</table>
+	
+	
+	<h2>Torrents assoc</h2>
 	<table class="table table-dark">
 		<thead class="thead-light ">
 			<tr>
 			<?php
-			foreach (array_keys($torrents[0]) as $title) {
+			foreach (array_keys($torrentsAssoc[0]) as $title) {
 			?>
 				<th scope="col"><?= $title ?></th>
 				<?php
@@ -149,14 +169,21 @@ $torrents = $torrents['torrents'];
 		</thead>
 		<tbody>
 		<?php
-			foreach ($torrents as $torrent) {
+			foreach ($torrentsAssoc as $torrent) {
 				?>
 			<tr>
 				<?php
-				foreach ($torrent as $value) {
+				foreach ($torrent as $key => $value) {
 					;?>
 				<td>
 					<?php
+					if ($key === 'comment' || $key === 'magnetLink' || $key === 'pieces') {
+						$value = '[...]';
+					}
+					$pos = stripos($key, 'date');
+					if ($pos > 0 || $pos ===0) {
+						$value = date ('Y-m-d H:i:s P', $value);
+					}
 					if (!is_array ($value)) {
 						echo $value;
 					}
