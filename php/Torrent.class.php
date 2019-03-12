@@ -20,6 +20,23 @@ class Torrent {
 	}
 	
 	
+	public static function getTorrentObjectsFromAssoc ($transmissionConfig) {
+		$transmission = new Vohof\Transmission($transmissionConfig);
+
+		$torrents = $transmission->get('all');
+		$torrentsAssoc = $torrents['torrents'];
+// 		var_dump($torrentsAssoc);
+		
+		$torrentsObject = [];
+		foreach ($torrentsAssoc as $torrent) {
+			$torrent = new Torrent($torrent);
+			$torrentsObject[] = $torrent;
+		}
+// 		var_dump($torrentsObject); die;
+		return $torrentsObject;
+	}
+	
+	
 	public function isDownloaded () {
 		return ($this->infos['percentDone'] == 1);
 	}

@@ -10,13 +10,5 @@ $transmission = new Vohof\Transmission($config['transmission']);
 $stats = $transmission->getStats();
 // var_dump($stats);
 
-$torrents = $transmission->get('all');
-$torrentsAssoc = $torrents['torrents'];
-// var_dump($torrents);
-
-$torrentsObject = [];
-foreach ($torrentsAssoc as $torrent) {
-	$torrent = new Torrent($torrent);
-	$torrentsObject[] = $torrent;
-}
+$torrentsObject = Torrent::getTorrentObjectsFromAssoc($config['transmission']);
 // var_dump($torrentsObject); die;

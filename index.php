@@ -169,11 +169,11 @@ require_once __DIR__ . '/index.ctrl.php';
 		</thead>
 		<tbody>
 		<?php
-			foreach ($torrentsAssoc as $torrent) {
+		foreach ($torrentsObject as $torrent) {
 				?>
 			<tr>
 				<?php
-				foreach ($torrent as $key => $value) {
+				foreach ($torrent->getInfos() as $key => $value) {
 					;?>
 				<td>
 					<?php
