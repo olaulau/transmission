@@ -15,6 +15,10 @@ class Torrent {
 		$this->infos = $infos;
 	}
 	
+	public function getInfos () { //TODO remove
+		return $this->infos;
+	}
+	
 	
 	public function isDownloaded () {
 		return ($this->infos['percentDone'] == 1);

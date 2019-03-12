@@ -159,7 +159,7 @@ require_once __DIR__ . '/index.ctrl.php';
 		<thead class="thead-light ">
 			<tr>
 			<?php
-			foreach (array_keys($torrentsAssoc[0]) as $title) {
+			foreach (array_keys($torrentsObject[0]->getInfos()) as $title) {
 			?>
 				<th scope="col"><?= $title ?></th>
 				<?php
