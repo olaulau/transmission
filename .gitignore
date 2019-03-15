@@ -1,7 +1,11 @@
 /.buildpath
 /.project
 /.settings/
+/.externalToolBuilders/
 
 /vendor/
 /php/config.inc.php
 
+/.htaccess
+/.htpasswd
+/sync.sh

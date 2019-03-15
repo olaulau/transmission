@@ -42,6 +42,10 @@ class Torrent {
 	}
 	
 	
+	public function getId() {
+		return ($this->infos['id']);
+	}
+	
 	public function getName() {
 		return ($this->infos['name']);
 	}
@@ -76,5 +80,17 @@ class Torrent {
 				return 'other';
 			break;
 		}
+	}
+	
+	
+	public function transfert ($transfertDestination) {
+		$src = rtrim($this->infos['downloadDir'] . '/' . $this->getName(), '/');
+		$dest = "$transfertDestination/";
+		$cmd = 'rsync -rh --stats --itemize-changes --partial --inplace "'.$src.'" "'.$dest.'"';
+		$redirect = '>> transfert.log 2>&1';
+		passthru("echo ' ' $redirect");
+		passthru("date $redirect");
+		passthru("pwd $redirect");
+		passthru("$cmd $redirect &");
 	}
 }

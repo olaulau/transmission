@@ -7,4 +7,5 @@ $config = [
 		'username' => '<user>',
 		'password' => '<password>',
 	],
+	'transfertDestination' => '',
 ];
