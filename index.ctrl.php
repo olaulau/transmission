@@ -25,5 +25,6 @@ foreach($torrentsObject as $torrentObject) {
 	$torrent->reset();
 	$torrent->load(['hashString=?', $transmissionTorrent['hashString']]);
 	$torrent->copyfrom($transmissionTorrent);
+	$torrent->addedDate = date('Y-m-d H:i:s P', $torrent->addedDate);
 	$torrent->save();
 }
