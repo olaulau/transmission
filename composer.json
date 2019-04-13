@@ -3,6 +3,7 @@
 		"vohof/transmission" : "^1.0",
 		"twbs/bootstrap" : "^4.1",
 		"components/jquery" : "^3.3",
-		"components/jqueryui" : "^1.12"
+		"components/jqueryui" : "^1.12",
+		"bcosca/fatfree": "^3.6"
 	}
 }

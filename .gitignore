@@ -9,3 +9,4 @@
 /.htaccess
 /.htpasswd
 /sync.sh
+/database.sqlite

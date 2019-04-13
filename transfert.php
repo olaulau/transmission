@@ -10,7 +10,7 @@ if (empty ($id)) {
 	die('no valid id parameter provided');
 }
 
-$torrentsObject = Torrent::getTorrentObjectsFromAssoc($config['transmission']);
+$torrentsObject = TransmissionTorrent::getTorrentObjectsFromAssoc($config['transmission']);
 // var_dump($torrentsObject); die;
 
 foreach ($torrentsObject as $torrent) {

@@ -1,6 +1,6 @@
 <?php
 
-class Torrent {
+class TransmissionTorrent {
 	
 	/**
 	 * @var array $array : an array of info about the torrent, got from the lib
@@ -29,7 +29,7 @@ class Torrent {
 		
 		$torrentsObject = [];
 		foreach ($torrentsAssoc as $torrent) {
-			$torrent = new Torrent($torrent);
+			$torrent = new TransmissionTorrent($torrent);
 			$torrentsObject[] = $torrent;
 		}
 // 		var_dump($torrentsObject); die;
