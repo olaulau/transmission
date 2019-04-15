@@ -1,5 +1,15 @@
 <?php
 
+function vd ($var) {
+	echo "<pre>";
+	var_dump($var);
+	echo "</pre>";
+}
+function vdd ($var) {
+	vd ($var);
+	die;
+}
+
 function unit_scale ($value, $scales, $divisor) {
 	$i = 0;
 	while ($value >= $divisor) {

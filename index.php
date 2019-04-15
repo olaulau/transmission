@@ -149,9 +149,9 @@ require_once __DIR__ . '/index.ctrl.php';
 			<tr>
 					<td><?= $torrent->getName() ?></td>
 					<td><?= $torrent->getStatus() ?></td>
-					<td><a class="btn btn-primary"
-						href="transfert.php?id=<?= $torrent->getId() ?>">transfert
-							</button></td>
+					<td>
+						<a class="btn btn-primary" href="transfert.php?id=<?= $torrent->getId() ?>"><?= $torrent->getTransfertDate() ? 'retransfert' : 'transfert' ?></a>
+					</td>
 				</tr>
 			<?php
 		}

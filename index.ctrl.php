@@ -10,7 +10,7 @@ require_once __DIR__ . '/php/Torrent.class.php';
 $db = new DB\SQL('sqlite:./database.sqlite');
 
 
-// get datas
+// get torrents from RPC
 $transmission = new Vohof\Transmission($config['transmission']);
 $stats = $transmission->getStats();
 // var_dump($stats);
@@ -18,7 +18,7 @@ $torrentsObject = TransmissionTorrent::getTorrentObjectsFromAssoc($config['trans
 // var_dump($torrentsObject[0]->getInfos()); die;
 
 
-// save into database
+// sync with database (insert missing one, retrieve transfertDate field
 $torrent = new DB\SQL\Mapper ($db, 'torrent');
 foreach($torrentsObject as $torrentObject) {
 	$transmissionTorrent = $torrentObject->getInfos();
@@ -27,4 +27,7 @@ foreach($torrentsObject as $torrentObject) {
 	$torrent->copyfrom($transmissionTorrent);
 	$torrent->addedDate = date('Y-m-d H:i:s P', $torrent->addedDate);
 	$torrent->save();
+	$torrentObject->setTransfertDate($torrent->transfertDate);
 }
+
+//TODO delete spare ones

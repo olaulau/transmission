@@ -83,6 +83,15 @@ class TransmissionTorrent {
 	}
 	
 	
+	public function getTransfertDate () {
+		return $this->infos['transfertDate'];
+	}
+	
+	public function setTransfertDate ($TransfertDate) {
+		$this->infos['transfertDate'] = $TransfertDate;
+	}
+	
+	
 	public function transfert ($transfertDestination) {
 		$src = rtrim($this->infos['downloadDir'] . '/' . $this->getName(), '/');
 		$dest = "$transfertDestination/";
