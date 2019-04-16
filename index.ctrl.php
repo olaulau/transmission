@@ -18,16 +18,25 @@ $torrentsObject = TransmissionTorrent::getTorrentObjectsFromAssoc($config['trans
 // var_dump($torrentsObject[0]->getInfos()); die;
 
 
-// sync with database (insert missing one, retrieve transfertDate field
-$torrent = new DB\SQL\Mapper ($db, 'torrent');
+// sync with database : insert missing one, retrieve transfertDate field
+$hashStrings = [];
 foreach($torrentsObject as $torrentObject) {
 	$transmissionTorrent = $torrentObject->getInfos();
-	$torrent->reset();
+	$torrent = new DB\SQL\Mapper ($db, 'torrent');
 	$torrent->load(['hashString=?', $transmissionTorrent['hashString']]);
 	$torrent->copyfrom($transmissionTorrent);
 	$torrent->addedDate = date('Y-m-d H:i:s P', $torrent->addedDate);
 	$torrent->save();
+	
 	$torrentObject->setTransfertDate($torrent->transfertDate);
+	$hashStrings[] = $transmissionTorrent['hashString'];
 }
 
-//TODO delete spare ones
+// delete spare ones
+$db->exec('
+	DELETE FROM torrent
+	WHERE hashString NOT IN (' . implode(',', array_fill(0, count($hashStrings), '?')) . ')',
+	$hashStrings
+);
+
+echo $db->log(); die;

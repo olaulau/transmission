@@ -25,8 +25,7 @@ foreach ($torrentsObject as $transmissionTorrent) {
 }
 // var_dump($transmissionTorrent); die;
 
-//DEBUG
-// $transmissionTorrent->transfert($config['transfertDestination']);
+$transmissionTorrent->transfert($config['transfertDestination']);
 
 
 // mark torrent as transfered
