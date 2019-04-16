@@ -1,15 +1,22 @@
-# requirements
-- php-sqlite
+# requirements :
+- php-sqlite (transfered torrent are stored in a small DB)
 
-# installation
+# installation :
 - composer install
 
+# projects used :
+- vohof/transmission : PHP wrapper for transmisison RPC API
+- twitter bootstrap
+- jquery
+- Fat Free Framework (only ORM part)
+- font awesome
+
 <br/>
 <br/>
 <br/>
 <br/>
 
-# TODO
+# TODO :
 ### infos
 - downloaded / uploaded
 - ratio

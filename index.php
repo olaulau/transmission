@@ -21,6 +21,7 @@ require_once __DIR__ . '/index.ctrl.php';
 
 <!-- Custom styles for this template -->
 <link href="sticky-footer-navbar.css" rel="stylesheet">
+<link href="index.css" rel="stylesheet">
 </head>
 
 <body>
@@ -169,12 +170,28 @@ require_once __DIR__ . '/index.ctrl.php';
 						?>
 					</td>
 					<td>
-						<a class="btn btn-primary" href="transfert.php?hashString=<?= $torrent->getHashString() ?>"> 
-							<i class="fas fa-download"></i> <?= $torrent->getTransfertDate() ? 'retransfert' : 'transfert' ?>
-						</a>
-						<a class="btn btn-danger" href="remove.php?hashString=<?= $torrent->getHashString() ?>"> 
-							<i class="fas fa-trash"></i> delete
-						</a>
+						<?php
+						if (empty ($torrent->getTransfertDate())) {
+							?>
+							<a class="btn btn-primary" href="transfert.php?hashString=<?= $torrent->getHashString() ?>">
+								<i class="fas fa-download"></i> transfert
+							</a>
+							<a class="btn btn-danger fake-disabled" href="remove.php?hashString=<?= $torrent->getHashString() ?>"> 
+								<i class="fas fa-trash"></i> delete
+							</a>
+							<?php
+						}
+						else {
+							?>
+							<a class="btn btn-primary fake-disabled" href="transfert.php?hashString=<?= $torrent->getHashString() ?>">
+								<i class="fas fa-download"></i> retransfert
+							</a>
+							<a class="btn btn-danger" href="remove.php?hashString=<?= $torrent->getHashString() ?>"> 
+								<i class="fas fa-trash"></i> delete
+							</a>
+							<?php
+						}
+						?>
 					</td>
 				</tr>
 			<?php

@@ -1,5 +1,4 @@
-
-/* table not 100% width */
-.table-nonfluid {
-   width: auto !important;
+/* buttons styled like disabled, but remains active */
+.btn.fake-disabled {
+	opacity: 0.65;
 }
