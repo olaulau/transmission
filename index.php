@@ -147,7 +147,27 @@ require_once __DIR__ . '/index.ctrl.php';
 			?>
 			<tr>
 					<td><?= $torrent->getName() ?></td>
-					<td><?= $torrent->getStatus() ?></td>
+					<td>
+						<?php
+						switch ($torrent->getStatus()) {
+							case 'downloading':
+							?> <span class="badge badge-pill badge-danger"><?= $torrent->getStatus() ?></span> <?php
+							break;
+							
+							case 'seeding':
+							?> <span class="badge badge-pill badge-warning"><?= $torrent->getStatus() ?></span> <?php
+							break;
+							
+							case 'finished':
+							?> <span class="badge badge-pill badge-success"><?= $torrent->getStatus() ?></span> <?php
+							break;
+							
+							default:
+							?> <span class="badge badge-pill badge-dark"><?= $torrent->getStatus() ?></span> <?php
+							break;
+						}
+						?>
+					</td>
 					<td>
 						<a class="btn btn-primary" href="transfert.php?hashString=<?= $torrent->getHashString() ?>"> 
 							<i class="fas fa-download"></i> <?= $torrent->getTransfertDate() ? 'retransfert' : 'transfert' ?>
