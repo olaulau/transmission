@@ -152,6 +152,9 @@ require_once __DIR__ . '/index.ctrl.php';
 						<a class="btn btn-primary" href="transfert.php?id=<?= $torrent->getId() ?>"> 
 							<i class="fas fa-download"></i> <?= $torrent->getTransfertDate() ? 'retransfert' : 'transfert' ?>
 						</a>
+						<a class="btn btn-danger disabled" href="remove.php?id=<?= $torrent->getId() ?>"> 
+							<i class="fas fa-trash"></i> delete
+						</a>
 					</td>
 				</tr>
 			<?php
