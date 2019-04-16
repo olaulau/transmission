@@ -21,7 +21,6 @@ require_once __DIR__ . '/index.ctrl.php';
 
 <!-- Custom styles for this template -->
 <link href="sticky-footer-navbar.css" rel="stylesheet">
-<link href="index.css" rel="stylesheet">
 </head>
 
 <body>
@@ -150,7 +149,9 @@ require_once __DIR__ . '/index.ctrl.php';
 					<td><?= $torrent->getName() ?></td>
 					<td><?= $torrent->getStatus() ?></td>
 					<td>
-						<a class="btn btn-primary" href="transfert.php?id=<?= $torrent->getId() ?>"><?= $torrent->getTransfertDate() ? 'retransfert' : 'transfert' ?></a>
+						<a class="btn btn-primary" href="transfert.php?id=<?= $torrent->getId() ?>"> 
+							<i class="fas fa-download"></i> <?= $torrent->getTransfertDate() ? 'retransfert' : 'transfert' ?>
+						</a>
 					</td>
 				</tr>
 			<?php
@@ -218,8 +219,9 @@ require_once __DIR__ . '/index.ctrl.php';
     ================================================== -->
 		<!-- Placed at the end of the document so the pages load faster -->
 		<script src="vendor/components/jquery/jquery.min.js"></script>
-		<script src="../../assets/js/vendor/popper.min.js"></script>
+<!-- 		<script src="../../assets/js/vendor/popper.min.js"></script> -->
 		<script src="vendor/twbs/bootstrap/dist/js/bootstrap.min.js"></script>
+		<script defer src="./vendor/fortawesome/font-awesome/js/all.min.js" crossorigin="anonymous"></script>
 		<script src="index.js"></script>
 
 </body>
