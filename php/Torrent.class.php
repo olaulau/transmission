@@ -30,7 +30,7 @@ class TransmissionTorrent {
 		$torrentsObject = [];
 		foreach ($torrentsAssoc as $torrent) {
 			$torrent = new TransmissionTorrent($torrent);
-			$torrentsObject[] = $torrent;
+			$torrentsObject[$torrent->getHashString()] = $torrent;
 		}
 // 		var_dump($torrentsObject); die;
 		return $torrentsObject;
@@ -89,6 +89,11 @@ class TransmissionTorrent {
 	
 	public function setTransfertDate ($TransfertDate) {
 		$this->infos['transfertDate'] = $TransfertDate;
+	}
+	
+	
+	public function getHashString () {
+		return $this->infos['hashString'];
 	}
 	
 	

@@ -15,15 +15,8 @@ $db = new DB\SQL('sqlite:./database.sqlite');
 // get torrents from RPC
 $transmission = new Vohof\Transmission($config['transmission']);
 $stats = $transmission->getStats();
-$torrentsObject = TransmissionTorrent::getTorrentObjectsFromAssoc($config['transmission']);
-
-// sort array by hashstring
-$torrentsSorted = [];
-foreach ($torrentsObject as $torrentObject) {
-	$hashString = $torrentObject->getInfos()['hashString'];
-	$torrentsSorted[$hashString] = $torrentObject;
-}
-$hashStrings = array_keys($torrentsSorted);
+$torrents = TransmissionTorrent::getTorrentObjectsFromAssoc($config['transmission']);
+$hashStrings = array_keys($torrents);
 
 
 // sync with database : insert missing one, retrieve transfertDate field
@@ -37,7 +30,7 @@ foreach ($dbTorrents as $id => $dbTorrent) {
 	unset ($dbTorrents[$id]);
 }
 // vdd($dbTorrents);
-foreach ($torrentsSorted as $hashString => $torrent) {
+foreach ($torrents as $hashString => $torrent) {
 	if (isset ($dbTorrents[$hashString])) {
 		$dbTorrent = $dbTorrents[$hashString];
 		$torrent->setTransfertDate($dbTorrent->transfertDate);

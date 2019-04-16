@@ -143,16 +143,16 @@ require_once __DIR__ . '/index.ctrl.php';
 			</thead>
 			<tbody>
 		<?php
-		foreach ($torrentsObject as $torrent) {
+		foreach ($torrents as $torrent) {
 			?>
 			<tr>
 					<td><?= $torrent->getName() ?></td>
 					<td><?= $torrent->getStatus() ?></td>
 					<td>
-						<a class="btn btn-primary" href="transfert.php?id=<?= $torrent->getId() ?>"> 
+						<a class="btn btn-primary" href="transfert.php?hashString=<?= $torrent->getHashString() ?>"> 
 							<i class="fas fa-download"></i> <?= $torrent->getTransfertDate() ? 'retransfert' : 'transfert' ?>
 						</a>
-						<a class="btn btn-danger disabled" href="remove.php?id=<?= $torrent->getId() ?>"> 
+						<a class="btn btn-danger disabled" href="remove.php?hashString=<?= $torrent->getHashString() ?>"> 
 							<i class="fas fa-trash"></i> delete
 						</a>
 					</td>

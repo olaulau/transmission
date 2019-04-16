@@ -10,26 +10,19 @@ require_once __DIR__ . '/php/Torrent.class.php';
 $db = new DB\SQL('sqlite:./database.sqlite');
 
 
-$id = intval($_GET['id']);
-if (empty ($id)) {
+$hashString = $_GET['hashString'];
+if (empty ($hashString)) {
 	die('no valid id parameter provided');
 }
 
-$torrentsObject = TransmissionTorrent::getTorrentObjectsFromAssoc($config['transmission']);
-// var_dump($torrentsObject); die;
+$torrents = TransmissionTorrent::getTorrentObjectsFromAssoc($config['transmission']);
+$torrent = $torrents['da26081ca69eb5a3d0f9bedd2c77613515b3500c'];
 
-foreach ($torrentsObject as $transmissionTorrent) {
-	if ($transmissionTorrent->getId() === $id) {
-		break;
-	}
-}
-// var_dump($transmissionTorrent); die;
-
-$transmissionTorrent->transfert($config['transfertDestination']);
+$torrent->transfert($config['transfertDestination']);
 
 
 // mark torrent as transfered
-$torrent = new DB\SQL\Mapper ($db, 'torrent');
-$torrent->load(['hashString=?', $transmissionTorrent->getInfos()['hashString']]);
-$torrent->transfertDate = date('Y-m-d H:i:s P');
-$torrent->save();
+$dbTorrent = new DB\SQL\Mapper ($db, 'torrent');
+$dbTorrent->load(['hashString=?', $torrent->getInfos()['hashString']]);
+$dbTorrent->transfertDate = date('Y-m-d H:i:s P');
+$dbTorrent->save();
