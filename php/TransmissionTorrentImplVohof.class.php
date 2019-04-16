@@ -1,6 +1,8 @@
 <?php
+require_once __DIR__ . '/TransmissionTorrent.abstract.php';
 
-class TransmissionTorrent {
+
+class TransmissionTorrentImplVohof extends TransmissionTorrent {
 	
 	/**
 	 * @var array $array : an array of info about the torrent, got from the lib
@@ -18,10 +20,6 @@ class TransmissionTorrent {
 		$this->infos = $infos;
 	}
 	
-	public function getInfos () { //TODO remove
-		return $this->infos;
-	}
-	
 	
 	public static function getTorrentObjectsFromAssoc ($transmissionConfig) {
 		self::$transmission = new Vohof\Transmission($transmissionConfig);
@@ -32,11 +30,16 @@ class TransmissionTorrent {
 		
 		$torrentsObject = [];
 		foreach ($torrentsAssoc as $torrent) {
-			$torrent = new TransmissionTorrent($torrent);
+			$torrent = new self($torrent);
 			$torrentsObject[$torrent->getHashString()] = $torrent;
 		}
 // 		var_dump($torrentsObject); die;
 		return $torrentsObject;
+	}
+	
+	
+	public function getInfos () { //TODO remove
+		return $this->infos;
 	}
 	
 	
@@ -51,6 +54,22 @@ class TransmissionTorrent {
 	
 	public function getName() {
 		return ($this->infos['name']);
+	}
+	
+	public function getTransfertDate () {
+		return $this->infos['transfertDate'];
+	}
+	
+	public function setTransfertDate ($TransfertDate) {
+		$this->infos['transfertDate'] = $TransfertDate;
+	}
+	
+	public function getHashString () {
+		return $this->infos['hashString'];
+	}
+	
+	public function getAddedDate () {
+		return $this->infos['addedDate'];
 	}
 	
 	
@@ -83,32 +102,6 @@ class TransmissionTorrent {
 				return 'other';
 			break;
 		}
-	}
-	
-	
-	public function getTransfertDate () {
-		return $this->infos['transfertDate'];
-	}
-	
-	public function setTransfertDate ($TransfertDate) {
-		$this->infos['transfertDate'] = $TransfertDate;
-	}
-	
-	
-	public function getHashString () {
-		return $this->infos['hashString'];
-	}
-	
-	
-	public function transfert ($transfertDestination) {
-		$src = rtrim($this->infos['downloadDir'] . '/' . $this->getName(), '/');
-		$dest = "$transfertDestination/";
-		$cmd = 'rsync -rh --stats --itemize-changes --partial --inplace "'.$src.'" "'.$dest.'"';
-		$redirect = '>> transfert.log 2>&1';
-		passthru("echo ' ' $redirect");
-		passthru("date $redirect");
-		passthru("pwd $redirect");
-		passthru("$cmd $redirect &");
 	}
 	
 	

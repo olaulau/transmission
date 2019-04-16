@@ -1,9 +1,6 @@
 <?php
-require_once __DIR__ . '/vendor/autoload.php';
-require_once __DIR__ . '/php/config.inc.php';
-require_once __DIR__ . '/php/functions.inc.php';
-require_once __DIR__ . '/php/Torrent.class.php';
-
+require_once __DIR__ . '/php/All.inc.php';
+use TransmissionTorrentImplVohof as TransmissionTorrent;
 
 // init
 require_once __DIR__ . '/init.php';
@@ -37,8 +34,10 @@ foreach ($torrents as $hashString => $torrent) {
 	}
 	else {
 		$dbTorrent->reset();
-		$dbTorrent->copyfrom($torrent->getInfos());
-		$dbTorrent->addedDate = date('Y-m-d H:i:s P', $torrent->addedDate);
+		$dbTorrent->hashString = $torrent->getHashString();
+		$dbTorrent->addedDate = date('Y-m-d H:i:s P', $torrent->getAddedDate());
+		$dbTorrent->id = $torrent->getId();
+		$dbTorrent->name = $torrent->getName();
 		$dbTorrent->save();
 	}
 }

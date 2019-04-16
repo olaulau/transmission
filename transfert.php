@@ -1,8 +1,6 @@
 <?php
-require_once __DIR__ . '/vendor/autoload.php';
-require_once __DIR__ . '/php/config.inc.php';
-require_once __DIR__ . '/php/functions.inc.php';
-require_once __DIR__ . '/php/Torrent.class.php';
+require_once __DIR__ . '/php/All.inc.php';
+use TransmissionTorrentImplVohof as TransmissionTorrent;
 
 
 // init
@@ -23,6 +21,6 @@ $torrent->transfert($config['transfertDestination']);
 
 // mark torrent as transfered
 $dbTorrent = new DB\SQL\Mapper ($db, 'torrent');
-$dbTorrent->load(['hashString=?', $torrent->getInfos()['hashString']]);
+$dbTorrent->load(['hashString=?', $torrent->getHashString()]);
 $dbTorrent->transfertDate = date('Y-m-d H:i:s P');
 $dbTorrent->save();

@@ -25,3 +25,8 @@
 
 ### actions
 - ask tracker for more peers
+
+### change PHP transmission lib
+- https://github.com/brycied00d/PHP-Transmission-Class
+- https://github.com/kleiram/transmission-php
+- https://github.com/irazasyed/php-transmission-sdk
