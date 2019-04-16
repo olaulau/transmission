@@ -17,5 +17,4 @@
 - % downloaded / seeded
 
 ### actions
-- remove (completely)
 - ask tracker for more peers

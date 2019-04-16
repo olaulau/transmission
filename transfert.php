@@ -16,7 +16,7 @@ if (empty ($hashString)) {
 }
 
 $torrents = TransmissionTorrent::getTorrentObjectsFromAssoc($config['transmission']);
-$torrent = $torrents['da26081ca69eb5a3d0f9bedd2c77613515b3500c'];
+$torrent = $torrents[$hashString];
 
 $torrent->transfert($config['transfertDestination']);
 

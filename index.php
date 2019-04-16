@@ -172,7 +172,7 @@ require_once __DIR__ . '/index.ctrl.php';
 						<a class="btn btn-primary" href="transfert.php?hashString=<?= $torrent->getHashString() ?>"> 
 							<i class="fas fa-download"></i> <?= $torrent->getTransfertDate() ? 'retransfert' : 'transfert' ?>
 						</a>
-						<a class="btn btn-danger disabled" href="remove.php?hashString=<?= $torrent->getHashString() ?>"> 
+						<a class="btn btn-danger" href="remove.php?hashString=<?= $torrent->getHashString() ?>"> 
 							<i class="fas fa-trash"></i> delete
 						</a>
 					</td>

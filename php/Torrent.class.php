@@ -7,6 +7,9 @@ class TransmissionTorrent {
 	 */
 	private $infos;
 	
+	private static $transmission;
+	
+	
 	/**
 	 * constructor
 	 * @param array $array an array of info about the torrent, got from the lib
@@ -21,9 +24,9 @@ class TransmissionTorrent {
 	
 	
 	public static function getTorrentObjectsFromAssoc ($transmissionConfig) {
-		$transmission = new Vohof\Transmission($transmissionConfig);
+		self::$transmission = new Vohof\Transmission($transmissionConfig);
 
-		$torrents = $transmission->get('all');
+		$torrents = self::$transmission->get('all');
 		$torrentsAssoc = $torrents['torrents'];
 // 		var_dump($torrentsAssoc);
 		
@@ -54,7 +57,7 @@ class TransmissionTorrent {
 	public function getStatus () {
 		switch ($this->infos['status']) {
 			case 0:
-				if (isDownloaded ()) {
+				if ($this->isDownloaded ()) {
 					return 'seeding';
 				}
 				else {
@@ -106,5 +109,10 @@ class TransmissionTorrent {
 		passthru("date $redirect");
 		passthru("pwd $redirect");
 		passthru("$cmd $redirect &");
+	}
+	
+	
+	public function delete () {
+		self::$transmission->remove([$this->getId()], true);
 	}
 }
