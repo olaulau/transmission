@@ -13,24 +13,39 @@ $db = new DB\SQL('sqlite:./database.sqlite');
 // get torrents from RPC
 $transmission = new Vohof\Transmission($config['transmission']);
 $stats = $transmission->getStats();
-// var_dump($stats);
 $torrentsObject = TransmissionTorrent::getTorrentObjectsFromAssoc($config['transmission']);
-// var_dump($torrentsObject[0]->getInfos()); die;
+
+// sort array by hashstring
+$torrentsSorted = [];
+foreach ($torrentsObject as $torrentObject) {
+	$hashString = $torrentObject->getInfos()['hashString'];
+	$torrentsSorted[$hashString] = $torrentObject;
+}
+$hashStrings = array_keys($torrentsSorted);
 
 
 // sync with database : insert missing one, retrieve transfertDate field
-$hashStrings = [];
-foreach($torrentsObject as $torrentObject) {
-	$transmissionTorrent = $torrentObject->getInfos();
-	$torrent = new DB\SQL\Mapper ($db, 'torrent');
-	$torrent->load(['hashString=?', $transmissionTorrent['hashString']]);
-	$torrent->copyfrom($transmissionTorrent);
-	$torrent->addedDate = date('Y-m-d H:i:s P', $torrent->addedDate);
-	$torrent->save();
-	
-	$torrentObject->setTransfertDate($torrent->transfertDate);
-	$hashStrings[] = $transmissionTorrent['hashString'];
+$dbTorrent = new DB\SQL\Mapper ($db, 'torrent');
+$dbTorrents = $dbTorrent->find();
+foreach ($dbTorrents as $id => $dbTorrent) {
+	$hashString = $dbTorrent['hashString'];
+	$dbTorrents[$hashString] = $dbTorrent;
+	unset ($dbTorrents[$id]);
 }
+// vdd($dbTorrents);
+foreach ($torrentsSorted as $hashString => $torrent) {
+	if (isset ($dbTorrents[$hashString])) {
+		$dbTorrent = $dbTorrents[$hashString];
+		$torrent->setTransfertDate($dbTorrent->transfertDate);
+	}
+	else {
+		$dbTorrent->reset();
+		$dbTorrent->copyfrom($transmissionTorrent);
+		$dbTorrent->addedDate = date('Y-m-d H:i:s P', $torrent->addedDate);
+		$dbTorrent->save();
+	}
+}
+
 
 // delete spare ones
 $db->exec('
@@ -39,4 +54,4 @@ $db->exec('
 	$hashStrings
 );
 
-echo $db->log(); die;
+// vdd ( $db->log() );

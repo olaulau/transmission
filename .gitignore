@@ -10,3 +10,4 @@
 /.htpasswd
 /sync.sh
 /database.sqlite
+/transfert.log
