@@ -5,22 +5,23 @@ require_once __DIR__ . '/index.ctrl.php';
 <!doctype html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport"
-	content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="description" content="">
-<meta name="author" content="">
-<link rel="icon" href="favicon.ico">
-
-<title>Transmission</title>
-
-<!-- Bootstrap core CSS -->
-<link href="vendor/twbs/bootstrap/dist/css/bootstrap.min.css"
-	rel="stylesheet">
-
-<!-- Custom styles for this template -->
-<link href="sticky-footer-navbar.css" rel="stylesheet">
-<link href="index.css" rel="stylesheet">
+	<meta charset="utf-8">
+	<meta name="viewport"
+		content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta name="description" content="">
+	<meta name="author" content="">
+	<link rel="shortcut icon" href="data:image/x-icon;," type="image/x-icon"> 
+	
+	<title>Transmission</title>
+	
+	<!-- Bootstrap core CSS -->
+	<link href="vendor/twbs/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+	
+	<link href="vendor/components/jqueryui/themes/base/jquery-ui.min.css" rel="stylesheet">
+	
+	<!-- Custom styles for this template -->
+	<link href="sticky-footer-navbar.css" rel="stylesheet">
+	<link href="index.css" rel="stylesheet">
 </head>
 
 <body>
@@ -174,8 +175,8 @@ require_once __DIR__ . '/index.ctrl.php';
 							?>
 							<a class="btn btn-primary" href="./php/transfert.php?hashString=<?= $torrent->getHashString() ?>">
 								<i class="fas fa-download"></i> transfert
-							</a>
-							<a class="btn btn-danger fake-disabled" href="./php/remove.php?hashString=<?= $torrent->getHashString() ?>"> 
+							</a> &nbsp; 
+							<a class="btn btn-danger fake-disabled confirmation" href="./php/remove.php?hashString=<?= $torrent->getHashString() ?>"> 
 								<i class="fas fa-trash"></i> delete
 							</a>
 							<?php
@@ -184,8 +185,8 @@ require_once __DIR__ . '/index.ctrl.php';
 							?>
 							<a class="btn btn-primary fake-disabled" href="./php/transfert.php?hashString=<?= $torrent->getHashString() ?>">
 								<i class="fas fa-download"></i> retransfert
-							</a>
-							<a class="btn btn-danger" href="./php/remove.php?hashString=<?= $torrent->getHashString() ?>"> 
+							</a> &nbsp; 
+							<a class="btn btn-danger confirmation" href="./php/remove.php?hashString=<?= $torrent->getHashString() ?>"> 
 								<i class="fas fa-trash"></i> delete
 							</a>
 							<?php
@@ -258,8 +259,9 @@ require_once __DIR__ . '/index.ctrl.php';
     ================================================== -->
 		<!-- Placed at the end of the document so the pages load faster -->
 		<script src="vendor/components/jquery/jquery.min.js"></script>
+		<script src="vendor/components/jqueryui/jquery-ui.min.js"></script>
 <!-- 		<script src="../../assets/js/vendor/popper.min.js"></script> -->
-		<script src="vendor/twbs/bootstrap/dist/js/bootstrap.min.js"></script>
+<!-- 		<script src="vendor/twbs/bootstrap/dist/js/bootstrap.min.js"></script> -->
 		<script defer src="./vendor/fortawesome/font-awesome/js/all.min.js" crossorigin="anonymous"></script>
 		<script src="index.js"></script>
 

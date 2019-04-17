@@ -5,7 +5,7 @@
 - composer install
 
 # projects used :
-- vohof/transmission : PHP wrapper for transmisison RPC API
+- vohof/transmission : PHP wrapper for transmission RPC API
 - twitter bootstrap
 - jquery
 - Fat Free Framework (only ORM part)
@@ -24,7 +24,6 @@
 - % downloaded / seeded
 
 ### actions
-- remove confirmation
 - ask tracker for more peers
 
 ### change PHP transmission lib
