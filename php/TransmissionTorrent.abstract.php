@@ -22,7 +22,7 @@ abstract class TransmissionTorrent {
 	
 	
 	public final function transfert ($transfertDestination) {
-		$src = rtrim($this->infos['downloadDir'] . '/' . $this->getName(), '/');
+		$src = rtrim($this->getInfos ()['downloadDir'] . '/' . $this->getName(), '/');
 		$dest = "$transfertDestination/";
 		$cmd = 'rsync -rh --stats --itemize-changes --partial --inplace "'.$src.'" "'.$dest.'"';
 		$redirect = '>> transfert.log 2>&1';

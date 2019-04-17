@@ -24,6 +24,7 @@
 - % downloaded / seeded
 
 ### actions
+- remove confirmation
 - ask tracker for more peers
 
 ### change PHP transmission lib

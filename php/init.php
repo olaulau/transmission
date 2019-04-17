@@ -1,11 +1,12 @@
 <?php
-require_once __DIR__ . '/php/All.inc.php';
+require_once __DIR__ . '/All.inc.php';
 use TransmissionTorrentImplVohof as TransmissionTorrent;
 
 
 // init
-// $f3 = \Base::instance ();
-$db = new DB\SQL('sqlite:./database.sqlite');
+$f3 = \Base::instance ();
+$f3->set('DEBUG',3);
+$db = new DB\SQL('sqlite:'.__DIR__.'/../database.sqlite');
 
 // torrent table
 $dbTorrent = new DB\SQL\Mapper ($db, 'torrent');

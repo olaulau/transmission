@@ -172,20 +172,20 @@ require_once __DIR__ . '/index.ctrl.php';
 						<?php
 						if (empty ($torrent->getTransfertDate())) {
 							?>
-							<a class="btn btn-primary" href="transfert.php?hashString=<?= $torrent->getHashString() ?>">
+							<a class="btn btn-primary" href="./php/transfert.php?hashString=<?= $torrent->getHashString() ?>">
 								<i class="fas fa-download"></i> transfert
 							</a>
-							<a class="btn btn-danger fake-disabled" href="remove.php?hashString=<?= $torrent->getHashString() ?>"> 
+							<a class="btn btn-danger fake-disabled" href="./php/remove.php?hashString=<?= $torrent->getHashString() ?>"> 
 								<i class="fas fa-trash"></i> delete
 							</a>
 							<?php
 						}
 						else {
 							?>
-							<a class="btn btn-primary fake-disabled" href="transfert.php?hashString=<?= $torrent->getHashString() ?>">
+							<a class="btn btn-primary fake-disabled" href="./php/transfert.php?hashString=<?= $torrent->getHashString() ?>">
 								<i class="fas fa-download"></i> retransfert
 							</a>
-							<a class="btn btn-danger" href="remove.php?hashString=<?= $torrent->getHashString() ?>"> 
+							<a class="btn btn-danger" href="./php/remove.php?hashString=<?= $torrent->getHashString() ?>"> 
 								<i class="fas fa-trash"></i> delete
 							</a>
 							<?php

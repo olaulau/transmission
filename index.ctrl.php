@@ -2,12 +2,6 @@
 require_once __DIR__ . '/php/All.inc.php';
 use TransmissionTorrentImplVohof as TransmissionTorrent;
 
-// init
-require_once __DIR__ . '/init.php';
-$f3 = \Base::instance ();
-$f3->set('DEBUG',3);
-$db = new DB\SQL('sqlite:./database.sqlite');
-
 
 // get torrents from RPC
 $transmission = new Vohof\Transmission($config['transmission']);
